@@ -21,7 +21,7 @@ nodemailer: utilizei o nodemailer para fazer o envio de email, porem utilizei el
 
 o projeto está hospedado na vercel pois utilizei next e lambda function então, considerei a melhor opção
 
-[link](https://get-marvel-cew7fzwp7-leandross.vercel.app/)
+[link vercel](https://get-marvel-cew7fzwp7-leandross.vercel.app/)
 
 para rodar o projeto local basta executar o comando, ```yarn``` para instalar as dependências e ``` yarn dev```
 
