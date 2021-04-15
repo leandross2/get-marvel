@@ -1,0 +1,22 @@
+.comicListFull{
+  position:absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    list-style: none;
+    
+  }
+}
+.comicList{
+  ul{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    list-style: none;
+  }
+}
+

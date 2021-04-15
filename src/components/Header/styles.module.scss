@@ -1,0 +1,47 @@
+.headerTop{
+  position: relative;
+  z-index: 1;
+ 
+  
+  button{
+    background: var();
+    border: 0;
+    margin-right: 2rem;
+    padding:1rem;
+  }
+}
+.content{
+  max-width: 1120px;
+  margin: 0 auto;
+  background-color: var(--red-transparent);
+  align-items: center;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo{
+  max-width: 8rem;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.mainMenu{
+  width: 36rem;
+  margin-top: 2rem;
+  ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    li{
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      transition: background .2s;
+      &:hover{
+        background: var(--white);
+        color: var(--black);
+      }
+    }
+  }
+}
