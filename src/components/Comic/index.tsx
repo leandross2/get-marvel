@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image'
 import { FaBookOpen } from 'react-icons/fa'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { useRecoilState } from 'recoil'
@@ -41,7 +42,10 @@ export const Comic = ({ comic, isFull, imgSize }: ComicProps) => {
 
   return (
     <li className={`${styles.comic} ${isFull ? styles.isFull : styles.isList}`} key={comic.id} onClick={handleOpenModal} >
-      <img src={`${comic.thumbnail.path}/portrait_${imgSize}.${comic.thumbnail.extension}`} alt={comic.title} />
+      <img
+        src={`${comic.thumbnail.path}/portrait_${imgSize}.${comic.thumbnail.extension}`}
+        alt={comic.title}
+      />
 
       <div className={styles.coverComic}>
         <p>{comic.title}</p>

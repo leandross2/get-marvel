@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from "react"
-import { GetStaticProps, GetServerSideProps } from "next"
+import { useState, useEffect } from "react"
+import { GetStaticProps } from "next"
 import { toast } from "react-toastify"
 import { useRecoilState } from 'recoil'
 
@@ -22,10 +22,7 @@ interface ComicListProps {
 }
 
 export default function Home({ comics }) {
-
-  // const { comics } = data.comics
-
-  const [comicsList, setComicList] = useState<ComicListProps[]>(() => {
+  const [comicsList, setComicList] = useState<ComicTypes[]>(() => {
     return comics ? comics : [] as ComicListProps[]
   })
 
@@ -41,7 +38,7 @@ export default function Home({ comics }) {
   return (
     <main className={styles.main}>
       <section className={styles.comicList}>
-        {!comics.error && <ComicList comics={comics} isFull imgSize="incredible" />}
+        {!comics.error && <ComicList comics={comicsList} isFull imgSize="incredible" />}
         {!!sendListComics.length && <SendList />}
       </section>
       <DetailComicModal />
@@ -49,11 +46,11 @@ export default function Home({ comics }) {
   )
 }
 
-export const getServerSideProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const response = await apiMarvel.get(`/comics?${credentials}&limit=54&orderBy=modified`)
     const data = response.data.data.results
-    // console.log(data)
+
     return {
       props: {
         comics: data,
@@ -61,13 +58,14 @@ export const getServerSideProps: GetStaticProps = async () => {
       },
     }
   } catch (err) {
-    console.log('err', err)
+    console.log(err)
     return {
       props: {
         comics: {
           error: true
         },
-      }
+      },
+      revalidate: 60 * 60 * 24 //24 horas
     }
   }
 }

@@ -1,19 +1,14 @@
 import { NextApiRequest, NextApiResponse, } from 'next'
 import nodemailer from 'nodemailer'
-import multer from 'multer'
-import filesystem from 'fs'
-
-import serverPath from '../../../utils/serverPath'
-import uploadConfig from '../../../config/upload'
 
 import { ComicProps } from '../../../@types/apiMarvel'
 
 interface Request extends NextApiRequest {
   body: {
     comics: ComicProps[]
+    to: string
   }
 }
-const upload = multer(uploadConfig)
 
 export default async (request: Request, response: NextApiResponse) => {
 
@@ -22,8 +17,7 @@ export default async (request: Request, response: NextApiResponse) => {
   if (request.method !== 'POST') {
     return response.status(401)
   }
-  console.log()
-  const { comics } = request.body
+  const { comics, to } = request.body
 
   nodemailer.createTestAccount((err, account) => {
     if (err) {
@@ -54,14 +48,14 @@ export default async (request: Request, response: NextApiResponse) => {
           <p style="color: #FFF"><b>Title: </b> ${comic.title}</p>
           <p style="color: #FFF"><b>Description: </b> ${comic.description}</p>
         </td>
-      <tr>`
+      </tr>`
     })
     contentMessage += '</table>'
 
     // Message object
     let message = {
       from: 'Sender Name <eumesmo@example.com>',
-      to: 'Recipient <vocemesmo@example.com>',
+      to: `Recipient <vocemesmo@example.com>`,
       subject: 'Your HQs ✔',
       text: 'Your HQs ✔',
       html: contentMessage
