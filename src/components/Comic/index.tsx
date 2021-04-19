@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { BiBook } from 'react-icons/bi'
+import Image from 'next/image'
+import { FaBookOpen } from 'react-icons/fa'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { useRecoilState } from 'recoil'
 
-import { comicModalDetailIsOpenState, comicModalDetailDataState } from '../../store/Modals/comicModalDetail'
-import { comicsSelectedsState } from '../../store/Comics/comicsSelecteds'
+import { comicModalDetailIsOpenState, comicModalDetailDataState } from '../../store/Modals/atoms'
+import { comicsSelectedsState } from '../../store/Comics/atoms'
 
 import { apiMarvel, credentials } from '../../services/apiMarvel';
 
 import { ComicProps as ComitTypes } from '../../@types/apiMarvel';
 interface ComicProps {
-  comic: ComitTypes,
-  onSelected: boolean
+  comic: ComitTypes
+  isFull?: boolean
+  imgSize: 'medium' | 'incredible'
 }
 
 import styles from './styles.module.scss'
 
-export const Comic = ({ comic }: ComicProps) => {
+export const Comic = ({ comic, isFull, imgSize }: ComicProps) => {
   const [comicsSelecteds, setComicsSelecteds] = useRecoilState(comicsSelectedsState)
   const classSelected = comicsSelecteds.includes(comic) ? styles.selected : ''
 
@@ -37,34 +39,19 @@ export const Comic = ({ comic }: ComicProps) => {
     requestApi()
 
   }
-  const handleSelectComic = (comic) => {
-    if (isComicSelected(comic)) {
-      const updatedComicsSelected = comicsSelecteds.filter(findComic => findComic.id !== comic.id)
-      setComicsSelecteds(updatedComicsSelected)
-      return
-    }
-    const comicsSelectedsEditable = [...comicsSelecteds]
-
-    comicsSelectedsEditable.push(comic)
-
-    setComicsSelecteds(comicsSelectedsEditable)
-  }
 
   return (
-    <li className={`${styles.comic} ${classSelected}`} key={comic.id} >
-      <img src={`${comic.thumbnail.path}/portrait_incredible.jpg`} alt={comic.title} />
+    <li className={`${styles.comic} ${isFull ? styles.isFull : styles.isList}`} key={comic.id} onClick={handleOpenModal} >
+      <img
+        src={`${comic.thumbnail.path}/portrait_${imgSize}.${comic.thumbnail.extension}`}
+        alt={comic.title}
+      />
 
       <div className={styles.coverComic}>
         <p>{comic.title}</p>
 
         <div className={styles.buttons}>
-          <button type="button" onClick={() => handleSelectComic(comic)}>
-            {isComicSelected(comic) ? <ImCheckboxChecked size={20} /> : <ImCheckboxUnchecked size={20} />}
-          </button>
-
-          <button type="button" onClick={handleOpenModal}>
-            <BiBook size={20} />
-          </button>
+          <FaBookOpen size={50} />
         </div>
       </div>
     </li>

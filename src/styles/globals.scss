@@ -1,25 +1,17 @@
 :root{
-  --background: #307477;
+  --background: rgb(33, 82, 85);
   
   --cover-comic: rgba(33, 82, 85, 0.747);
 
-  
   --white: #FFFFFF;
   --black: #000000;
 
   --red: #ec1d24;
   --red-transparent: rgb(236 29 36 / 83%);
-
-  --green: #33CC95;
   
-  --blue: #1a3353;
+  --blue: #1a3353;  
+  --blue-transparent: rgb(3 63 75 / 65%);
   --blue-light: #3e79f7;
-
-  --text-title: #1a3353;
-  --text-subtitle: #455560;
-  --text-body: #455560;
-
-  --border: #e6ebf1;
 }
 
 *{
@@ -43,6 +35,7 @@ body{
   background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 4%, rgba(0,27,32,1) 28%, rgb(5 85 101) 100%);
   -webkit-font-smoothing: antialiased;  
   height: 100vh;
+  overflow: hidden;
 }
 
 body, input, textarea, button{
@@ -55,13 +48,18 @@ h1, h2, h3, h4, h5, h6, strong{
 }
 
 button{ 
-  cursor: pointer
+  cursor: pointer;
+  transition: filter .2s;
+  &:hover{
+    filter: brightness(.8)
+  }
 }
 
-[disable]{
+[disabled]{
   opacity: 0.6;
   cursor: not-allowed
 }
+
 a{
   color: inherit;
   text-decoration: none;

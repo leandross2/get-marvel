@@ -1,30 +1,43 @@
 .headerTop{
   position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  background-color: var(--blue);
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 1;
- 
-  
+  border-left: 4px double var(--white);
+  border-right: 4px double var(--white);
+  border-bottom: 4px double var(--white);
   button{
-    background: var();
+    // background: var();
     border: 0;
     margin-right: 2rem;
     padding:1rem;
   }
 }
+
 .content{
-  max-width: 1120px;
-  margin: 0 auto;
-  background-color: var(--red-transparent);
-  align-items: center;
-  padding: 1rem 0;
+  width: 100%;
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.logoArea{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  .search{
+    flex: 1;
+    margin-left: 2rem;
+    height: 3rem;
+  }
 }
 
 .logo{
   max-width: 8rem;
   display: block;
-  margin-bottom: 2rem;
 }
 
 .mainMenu{

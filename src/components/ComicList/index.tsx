@@ -10,15 +10,16 @@ interface ComicListProps {
   comics: ComicProps[]
   isFull?: boolean
   selectable?: boolean
+  imgSize: 'medium' | 'incredible'
 }
 
-export const ComicList = ({ comics, isFull }: ComicListProps) => {
+export const ComicList = ({ comics, isFull, imgSize }: ComicListProps) => {
   const setContainerClass = isFull ? styles.comicListFull : styles.comicList
   return (
     <div className={setContainerClass}>
       <ul>
         {comics.map(comic => (
-          <Comic comic={comic} onSelected={false} key={comic.id} />
+          <Comic comic={comic} isFull={isFull} key={comic.id} imgSize={imgSize} />
         ))}
       </ul>
     </div >

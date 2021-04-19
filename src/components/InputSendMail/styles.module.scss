@@ -1,0 +1,18 @@
+.container {
+  border: 1px solid var(--white);
+  background: var(--white);
+  display: flex;
+  align-items:center;
+margin-bottom: 1rem;
+  input{
+    padding: 1rem 2rem 1rem 0.5rem;
+    border: 0;
+    flex: 1;
+  }
+  svg{
+    color: #333;
+    position:absolute;
+    right: 2rem;
+    cursor: pointer;
+  }
+}
