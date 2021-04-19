@@ -1,10 +1,11 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse, } from 'next'
 import nodemailer from 'nodemailer'
 import multer from 'multer'
+import filesystem from 'fs'
 
+import serverPath from '../../../utils/serverPath'
 import uploadConfig from '../../../config/upload'
 
-import { apiMarvel, credentials } from '../../../services/apiMarvel'
 import { ComicProps } from '../../../@types/apiMarvel'
 
 interface Request extends NextApiRequest {
@@ -15,9 +16,13 @@ interface Request extends NextApiRequest {
 const upload = multer(uploadConfig)
 
 export default async (request: Request, response: NextApiResponse) => {
+
+
+
   if (request.method !== 'POST') {
     return response.status(401)
   }
+  console.log()
   const { comics } = request.body
 
   nodemailer.createTestAccount((err, account) => {
@@ -38,13 +43,20 @@ export default async (request: Request, response: NextApiResponse) => {
         pass: account.pass
       }
     });
-    let contentMessage = ''
+    let contentMessage = '<table style="width: 100%; background: rgb(33, 82, 85);">'
     comics.map(comic => {
-      contentMessage += `<p>
-        <img src="${comic.thumbnail.path}" />
-        <b>Title: </b> ${comic.title}
-      </p>`
+      contentMessage += `
+      <tr style="border-top: 1px double #FFF">
+        <td>
+        <img src="${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}" />
+        </td>
+        <td>
+          <p style="color: #FFF"><b>Title: </b> ${comic.title}</p>
+          <p style="color: #FFF"><b>Description: </b> ${comic.description}</p>
+        </td>
+      <tr>`
     })
+    contentMessage += '</table>'
 
     // Message object
     let message = {

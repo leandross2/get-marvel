@@ -8,15 +8,16 @@
   display: flex;
   align-items:center;
   justify-content:center;
+  z-index: 2;
 }
 
 .reactModalContent{
   width: 100%;
-  max-width: 776px;
-  background: var(--background);
+  background: var(--blue-transparent);
   padding: 3rem;
   position: relative;
-  border-radius: 0.25rem;
+  border-top: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
 }
 
 .reactModalClose{
@@ -56,3 +57,4 @@
     }
   }
 }
+

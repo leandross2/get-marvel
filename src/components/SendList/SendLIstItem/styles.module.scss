@@ -1,0 +1,26 @@
+.item{
+  display: flex;
+  list-style: none;
+  padding: 1rem 0;
+  & + .item{
+    border-top: 1px solid var(--white);
+  }
+  .description{
+    margin-left: 1.5rem;
+    .title{
+      color: var(--white);
+    }
+  }
+  .close{
+    position: relative;
+    top: 0;
+    right: 1px;
+    height: 20px;
+    width: 20px;
+    background: transparent;
+    border: 0;
+    color: #FFF;
+    margin-right: 1rem;
+
+  }
+}

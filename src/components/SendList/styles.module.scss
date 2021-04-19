@@ -1,0 +1,32 @@
+.sendList{
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  background-color: var(--blue-transparent);
+  height: 100vh;
+  padding: 1rem;
+  width: 337px;
+  border-left: var(--white) solid 1px;
+  
+  .list{
+    overflow: auto;
+    height: 86vh;
+  }
+  .sendButtonArea{
+    button{
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--white);
+      display: flex;
+      justify-content:center;
+      align-items:center;
+      border-radius: .5rem;
+      padding: 1.5rem 0;
+      width: 100%;
+      svg{
+        margin-left: .5rem;
+      }
+    }
+  }
+}
