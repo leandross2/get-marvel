@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRecoilState } from 'recoil'
 import { AiOutlineSend } from 'react-icons/ai'
 
@@ -17,6 +17,7 @@ export const SendList: React.FC = () => {
   const [sendListComics, setSendListComics] = useRecoilState<ComicProps[]>(sendListState)
   const [inputMailTo, setInputMailTo] = useRecoilState<string>(inputMailTostate)
   const [sending, setSending] = useState(false)
+  const inputMailToRef = useRef(null)
 
   const handleRemoveItemList = (comic) => {
     const updatedComicsSelected = sendListComics.filter(findComic => findComic.id !== comic.id)
@@ -25,7 +26,9 @@ export const SendList: React.FC = () => {
 
     return
   }
-
+  useEffect(() => {
+    console.log(inputMailToRef)
+  }, [inputMailToRef])
   const handleSendMail = async () => {
     try {
       if (!sending && inputMailTo !== '') {
@@ -57,7 +60,7 @@ export const SendList: React.FC = () => {
       </ul>
 
       <div className={styles.sendButtonArea}>
-        <InputSendMail />
+        <InputSendMail ref={inputMailToRef} />
 
         <button type="button" onClick={handleSendMail} disabled={sending}>
           Send Mail
